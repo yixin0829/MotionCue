@@ -1,7 +1,5 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import TextField from '@mui/material/TextField';
-
 import Button from '@mui/material/Button';
 import CameraIcon from '@mui/icons-material/PhotoCamera';
 import Card from '@mui/material/Card';
@@ -144,26 +142,12 @@ export default function Homepage() {
             <Stack
               sx={{ pt: 4 }}
               direction="row"
-              spacing={0}
+              spacing={2}
               justifyContent="center"
             >
-
-                  <Item>
-                  <Box
-                    sx={{
-                      width: 250,
-                      maxWidth: '100%',
-                    }}
-                  >
-                    <TextField fullWidth label="Enter a video URL" size="medium" id="fullWidth"/>
-                  </Box>
-                    
-                  </Item>
-                  <Item>
-                    <Button class="button" variant="contained">Submit</Button>
-                  </Item>              
-
-              </Stack>
+              <Button class="button" variant="contained" onClick={handleSubmit}>Submit a video url</Button>
+              <Button variant="outlined">View an example</Button>
+            </Stack>
           </Container>
         </Box>
          </Item>
