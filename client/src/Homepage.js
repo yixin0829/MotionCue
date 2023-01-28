@@ -18,6 +18,10 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+ // import image
+ import sample_detect_img from './sample-homepage-motion-annotated.gif';
+
+
 export const themeOptions = createTheme({
   palette: {
     type: 'light',
@@ -113,8 +117,9 @@ export default function Homepage() {
         </Grid>
         <Grid item xs={8}>
           <Item>
-
-
+            <body>
+          <img padding_top={10} src={sample_detect_img} width="500" height="350" class="center"/>   
+          </body>     
           </Item>
         </Grid>
         </Grid>
