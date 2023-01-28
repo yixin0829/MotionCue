@@ -35,11 +35,11 @@ export const themeOptions = createTheme({
 });
 
 const Item = styled(Paper)(({ theme }) => ({
-  // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: 'transparent',
+  boxShadow: 'none',
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
-  // color: theme.palette.text.secondary,
 }));
 
 function Copyright() {
@@ -47,7 +47,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Dance-scription
+        MotionCue
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -67,7 +67,7 @@ export default function Homepage() {
         <Toolbar>
           <CameraIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-            Dance-scription 
+            MotionCue
           </Typography>
         </Toolbar>
       </AppBar>
@@ -109,10 +109,10 @@ export default function Homepage() {
             </Stack>
           </Container>
         </Box>
-        hello </Item>
+         </Item>
         </Grid>
         <Grid item xs={8}>
-          <Item>xs=8
+          <Item>
 
 
           </Item>
@@ -129,7 +129,7 @@ export default function Homepage() {
           color="text.secondary"
           component="p"
         >
-          Welcome to Dance-scription. Here to help you accelerate your learning!!
+          Welcome to MotionCue. Here to help you accelerate your learning!!
         </Typography>
         <Copyright />
       </Box>
