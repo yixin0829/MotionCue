@@ -3,12 +3,34 @@ import cv2
 import pafy
 import os
 import shutil
+import re
 
 print(cv2.__version__)
 
 def extractImages(pathIn):
     # Config temporary directory path for storing video frames
     TEMP_DIR = "server/temp/"
+
+    # Replace youtu.be with youtube.com
+    pathIn = pathIn.replace("youtu.be", "youtube.com")
+    path_split = pathIn.rsplit("/", 1)
+
+    if "?v=" in pathIn:
+            if not re.match("[a-zA-Z0-9]{11}", path_split[1]):
+                print("Youtube Link Incorrect")  
+    else:
+        # Remove existing query parameters
+        pathIn = pathIn.split("?", 1)[0]
+
+        # Make sure unique youtube ID link is correct and stored inside a query parameter
+        if re.match("[a-zA-Z0-9]{11}", path_split[1]):
+            if "?v=" not in path_split[1]:
+                pathIn = path_split[0] + "/?v=" + path_split[1]
+        else:
+            print("Youtube Link Incorrect")
+            return
+    
+    print(pathIn)
 
     count = 1
     video = pafy.new(pathIn)
@@ -37,6 +59,8 @@ def extractImages(pathIn):
         vidcap.set(cv2.CAP_PROP_POS_MSEC,(count*1000)) 
         success,image = vidcap.read()
         print (f'Read a new frame {count}: ', success)
+        if not success:
+            break
         cv2.imwrite(TEMP_DIR + "/frame%d.jpg" % count, image)     # save frame as JPEG file
         count = count + 1
 
