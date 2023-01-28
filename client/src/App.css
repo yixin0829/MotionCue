@@ -11,10 +11,11 @@
   border-radius: 3px;
   border: 0;
   color: white;
-  height: 48px;
+  height: 56px;
   padding: 0 30px;
   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
 }
+
 .center {
   display: block;
   margin-top: 100px;
@@ -44,6 +45,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
 
 .App-link {
   color: #61dafb;
