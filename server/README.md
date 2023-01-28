@@ -22,3 +22,7 @@
   - too many repeats could be a concern because the same frame might repeat again, so we will have many duplicates.
     - what should we do?
 
+## Learning Log
+### Training Dance
+- Dance model training pipeline
+
