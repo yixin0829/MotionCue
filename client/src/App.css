@@ -3,6 +3,14 @@
   font: "PT Sans";
 }
 
+.center {
+  display: block;
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

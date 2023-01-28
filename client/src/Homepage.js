@@ -18,6 +18,10 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+ // import image
+ import sample_detect_img from './sample-homepage-motion-annotated.gif';
+
+
 export const themeOptions = createTheme({
   palette: {
     type: 'light',
@@ -35,11 +39,11 @@ export const themeOptions = createTheme({
 });
 
 const Item = styled(Paper)(({ theme }) => ({
-  // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: 'transparent',
+  boxShadow: 'none',
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
-  // color: theme.palette.text.secondary,
 }));
 
 function Copyright() {
@@ -47,7 +51,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Dance-scription
+        MotionCue
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -67,7 +71,7 @@ export default function Homepage() {
         <Toolbar>
           <CameraIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-            Dance-scription 
+            MotionCue
           </Typography>
         </Toolbar>
       </AppBar>
@@ -109,12 +113,13 @@ export default function Homepage() {
             </Stack>
           </Container>
         </Box>
-        hello </Item>
+         </Item>
         </Grid>
         <Grid item xs={8}>
-          <Item>xs=8
-
-
+          <Item>
+            <body>
+          <img padding_top={10} src={sample_detect_img} width="500" height="350" class="center"/>   
+          </body>     
           </Item>
         </Grid>
         </Grid>
@@ -129,7 +134,7 @@ export default function Homepage() {
           color="text.secondary"
           component="p"
         >
-          Welcome to Dance-scription. Here to help you accelerate your learning!!
+          Welcome to MotionCue. Here to help you accelerate your learning!!
         </Typography>
         <Copyright />
       </Box>
