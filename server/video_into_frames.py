@@ -5,33 +5,36 @@ import os
 import shutil
 import re
 
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
+pafy.set_api_key(os.getenv("GOOGLE_API"))
+
 print(cv2.__version__)
 
 def extractImages(pathIn):
     # Config temporary directory path for storing video frames
-    TEMP_DIR = "server/temp/"
+    TEMP_DIR = "temp/"
 
     # Replace youtu.be with youtube.com
     pathIn = pathIn.replace("youtu.be", "youtube.com")
-    path_split = pathIn.rsplit("/", 1)
-
     if "?v=" in pathIn:
-            if not re.match("[a-zA-Z0-9]{11}", path_split[1]):
-                print("Youtube Link Incorrect")  
+        # Remove query parameters not related to ?v=
+        pathIn = pathIn.rsplit("&", 1)[0]
     else:
         # Remove existing query parameters
         pathIn = pathIn.split("?", 1)[0]
+        path_split = pathIn.rsplit("/", 1)
 
-        # Make sure unique youtube ID link is correct and stored inside a query parameter
-        if re.match("[a-zA-Z0-9]{11}", path_split[1]):
-            if "?v=" not in path_split[1]:
-                pathIn = path_split[0] + "/?v=" + path_split[1]
+
+        # Make sure unique youtube ID link is stored inside a query parameter
+        if re.match("[a-zA-Z0-9_-]{11}", path_split[1]):
+            # if "?v=" not in path_split[1]:
+            pathIn = path_split[0] + "/?v=" + path_split[1]
         else:
             print("Youtube Link Incorrect")
             return
     
-    print(pathIn)
-
     count = 1
     video = pafy.new(pathIn)
 
