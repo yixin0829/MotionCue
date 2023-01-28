@@ -63,6 +63,14 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
 }));
 
+const responseContext = React.createContext({
+  response: [], fetchResponse: () => {}
+})
+
+// function SendYoutubeURL() {
+  
+// }
+
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -81,6 +89,24 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const theme = createTheme();
 
 export default function Homepage() {
+  const [youtubeURL, setYoutubeURL] = React.useState("")
+  const {response, fetchResponse} = React.useContext(responseContext)
+
+  const handleInput = event  => {
+    setYoutubeURL(event.target.value)
+  }
+  
+  const handleSubmit = (event) => {
+    const newURL = {
+      "url": "youtubeURL"
+    }
+  fetch("http://localhost:8000/youtube_url/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newURL),
+  }).then(fetchResponse)
+}
+// localhost:8000/youtube_url
   return (
     <ThemeProvider theme={themeOptions}>
       <CssBaseline />
@@ -119,7 +145,7 @@ export default function Homepage() {
               spacing={2}
               justifyContent="center"
             >
-              <Button class="button" variant="contained">Submit a video url</Button>
+              <Button class="button" variant="contained" onClick={handleSubmit}>Submit a video url</Button>
               <Button variant="outlined">View an example</Button>
             </Stack>
           </Container>

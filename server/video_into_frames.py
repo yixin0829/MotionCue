@@ -41,4 +41,4 @@ def extractImages(pathIn):
         count = count + 1
 
 if __name__ == "__main__":
-    extractImages("https://www.youtube.com/watch?v=n99xj9pd35g")
+    extractImages("https://www.youtube.com/watch?v=f-QZ0QHs8SY&ab_channel=EbyChannel")

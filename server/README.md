@@ -1,11 +1,13 @@
 # Backend
 
- 1. create a virtual env. 
+### Running the video slicer
+ 1. create a virtual env. (inside server not app)
    - python3 -m venv myvenv  
  2. run your venv
    - source myvenv/bin/activate
  3. install requiremnts
    - pip install -r requirements.txt 
+4. run the slicer "python3 video_into_frames.py"
 
 
 # Working samples
