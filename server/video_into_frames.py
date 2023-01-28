@@ -1,14 +1,18 @@
-import sys
 import cv2
 import pafy
 import os
 import shutil
+from dotenv import load_dotenv
+
 
 print(cv2.__version__)
 
+load_dotenv()  # take environment variables from .env.
+pafy.set_api_key(os.getenv("GOOGLE_API"))
+
 def extractImages(pathIn):
     # Config temporary directory path for storing video frames
-    TEMP_DIR = "server/temp/"
+    TEMP_DIR = "temp/"
 
     count = 1
     video = pafy.new(pathIn)
@@ -37,8 +41,11 @@ def extractImages(pathIn):
         vidcap.set(cv2.CAP_PROP_POS_MSEC,(count*1000)) 
         success,image = vidcap.read()
         print (f'Read a new frame {count}: ', success)
-        cv2.imwrite(TEMP_DIR + "/frame%d.jpg" % count, image)     # save frame as JPEG file
+        try:
+            cv2.imwrite(TEMP_DIR + "/frame%d.jpg" % count, image)     # save frame as JPEG file
+        except Exception as e:
+            break
         count = count + 1
 
 if __name__ == "__main__":
-    extractImages("https://www.youtube.com/watch?v=n99xj9pd35g")
+    extractImages("https://www.youtube.com/watch?v=Ef3zmMC0pxs")
