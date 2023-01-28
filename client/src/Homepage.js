@@ -17,6 +17,12 @@ import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { CssVarsProvider, extendTheme } from '@mui/joy/styles';
+import Box2 from '@mui/joy/Box';
+
+ // import image
+ import sample_detect_img from './sample-homepage-motion-annotated.gif';
+
 
 export const themeOptions = createTheme({
   palette: {
@@ -34,12 +40,27 @@ export const themeOptions = createTheme({
   direction: 'rtl',
 });
 
+const customTheme = extendTheme({
+  typography: {
+    display1: {
+      // `--joy` is the default CSS variable prefix.
+      // If you have a custom prefix, you have to use it instead.
+      // For more details about the custom prefix, go to https://mui.com/joy-ui/customization/using-css-variables/#custom-prefix
+      background:
+      `linear-gradient(45deg, #5a63e0 20%, #ff8e53 90%)`,
+      // `Webkit*` properties must come later.
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+    },
+  },
+});
+
 const Item = styled(Paper)(({ theme }) => ({
-  // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: 'transparent',
+  boxShadow: 'none',
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
-  // color: theme.palette.text.secondary,
 }));
 
 function Copyright() {
@@ -47,7 +68,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Dance-scription
+        MotionCue
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -63,11 +84,11 @@ export default function Homepage() {
   return (
     <ThemeProvider theme={themeOptions}>
       <CssBaseline />
-      <AppBar position="relative">
+      <AppBar class="button" position="relative">
         <Toolbar>
           <CameraIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-            Dance-scription 
+            MotionCue
           </Typography>
         </Toolbar>
       </AppBar>
@@ -85,18 +106,12 @@ export default function Homepage() {
           }}
         >
           <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-            MotionCue
-            </Typography>
+            <CssVarsProvider theme={customTheme}>
+              <Box sx={(theme) => theme.typography.display1}>MotionCue</Box>
+            </CssVarsProvider>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              MotionCue is digitalizing the Performing Arts. We are bringing tools to digitalize your choreography and videos.
-              present in the process of digitisation of the dancing body, to identify its ... ments and dance steps that used to convey the embod-.
+              MotionCue is digitalizing the Performing Arts. We are bringing tools to textualize choreography in videos.
+              This is a new form of transcribing! We are digitalizing body movements, in order to identify the movements and dance steps, so that we can provide users a comprehensive textual guide on dance movements. 
             </Typography>
             <Stack
               sx={{ pt: 4 }}
@@ -104,17 +119,18 @@ export default function Homepage() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained">Upload a video</Button>
+              <Button class="button" variant="contained">Submit a video url</Button>
               <Button variant="outlined">View an example</Button>
             </Stack>
           </Container>
         </Box>
-        hello </Item>
+         </Item>
         </Grid>
         <Grid item xs={8}>
-          <Item>xs=8
-
-
+          <Item>
+            <body>
+          <img padding_top={10} src={sample_detect_img} width="500" height="350" class="center"/>   
+          </body>     
           </Item>
         </Grid>
         </Grid>
@@ -129,7 +145,7 @@ export default function Homepage() {
           color="text.secondary"
           component="p"
         >
-          Welcome to Dance-scription. Here to help you accelerate your learning!!
+          Welcome to MotionCue. Here to help you accelerate your learning!!
         </Typography>
         <Copyright />
       </Box>
@@ -139,7 +155,8 @@ export default function Homepage() {
   );
 }
 
-
+//unused
+// On the backend, we contextulize your choreography to text by digitising a dancing body. This is a new form of transcribing! We are digitalizing body movements, in order to identify the movements and dance steps, so that we can provide users a comprehensive textual guide on dance movements. (/)
 
 //       <Container sx={{ py: 8 }} maxWidth="md">
 //   {/* End hero unit */}
