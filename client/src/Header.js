@@ -79,7 +79,7 @@ export default function Header() {
        <Copyright />
      </Box>
      <CssVarsProvider theme={customTheme}>
-            <Box  sx={(theme) => Object.assign(theme.typography.display1, {"margin-top": 80} )}>About</Box>
+            <Box  sx={(theme) => Object.assign(theme.typography.display1, {"margin-top": 80, "margin-bottom": 20} )}>About</Box>
         </CssVarsProvider>
         <Box class="About" >
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
