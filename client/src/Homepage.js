@@ -72,6 +72,8 @@ export default function Homepage({youtubeURL, setYoutubeURL, setTranscripts, set
     const newURL = {
       "url": youtubeURL
     }
+    setMessage("")
+    setTranscripts([])
 
     fetch("http://localhost:8000/youtube_url/", {
       method: "POST",

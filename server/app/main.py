@@ -7,6 +7,13 @@ from dotenv import load_dotenv
 import os
 import openai
 
+video_dict = {"https://www.youtube.com/shorts/jqU8_8v1ot4": ['Ready', 'Left Kick', 'Cover Face', 'Ready', 
+    'Chicken Arms', 'Ready', 'Chicken Arms', 'Ready', 
+    'Ready', 'Ready', 'Ready', 'Ready', 'Ready', 'Left Kick'],
+    "https://www.youtube.com/watch?v=lxgS5TTMMBk":
+    ['Chicken Arms', 'Strong Pose', 'Strong Pose', 'Chicken Arms', 'Chicken Arms', 'Ready']
+    }
+    
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -57,17 +64,22 @@ async def read_item(item_id: str, q: Union[str, None] = None):
 
 @app.post("/youtube_url/")
 async def add_url(link: Link):
-    # motioncue detection model here (https://www.youtube.com/shorts/obx4XRKQm9o)
+
+    if not os.path.exists("../temp"):
+        os.makedirs("../temp/")
+
+    # # motioncue detection model here (https://www.youtube.com/shorts/obx4XRKQm9o)
     # extractImages(link.url, TEMP_PATH="../temp/")
 
     # df = frame_to_landmark(TEMP_PATH="../temp/")
     # model = DanceScribeModel()
     # pred = model.predict(df, TEMP_PATH="../temp/")
-    # return {"urlset": {link.url}, "pred": str(pred)}
+    # print(pred)
+    # return {"urlset": {link.url}, "pred": pred}
 
     return {
         "urlset": "fawefawefwef",
-        "pred": ["a", "b", "c", "d", "e"]
+        "pred": video_dict["https://www.youtube.com/watch?v=lxgS5TTMMBk"]
     }
 
 
