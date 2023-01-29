@@ -59,10 +59,17 @@ async def read_item(item_id: str, q: Union[str, None] = None):
 async def add_url(link: Link):
     # motioncue detection model here (https://www.youtube.com/shorts/obx4XRKQm9o)
     # extractImages(link.url, TEMP_PATH="../temp/")
-    df = frame_to_landmark(TEMP_PATH="../temp/")
-    model = DanceScribeModel()
-    pred = model.predict(df, TEMP_PATH="../temp/")
-    return {"urlset": {link.url}, "pred": str(pred)}
+
+    # df = frame_to_landmark(TEMP_PATH="../temp/")
+    # model = DanceScribeModel()
+    # pred = model.predict(df, TEMP_PATH="../temp/")
+    # return {"urlset": {link.url}, "pred": str(pred)}
+    
+    return {
+        "urlset": "fawefawefwef",
+        "pred": ["a", "b", "c", "d", "e"]
+    }
+
 
 @app.get("/generate")
 async def generate(prompt: str):

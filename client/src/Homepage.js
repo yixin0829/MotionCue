@@ -71,9 +71,10 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
-export default function Homepage({youtubeURL, setYoutubeURL, response, fetchResponse}) {
+export default function Homepage({youtubeURL, setYoutubeURL, setTranscripts}) {
   
   const [value, setValue] = React.useState('one');
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -87,11 +88,14 @@ export default function Homepage({youtubeURL, setYoutubeURL, response, fetchResp
     const newURL = {
       "url": youtubeURL
     }
-  fetch("http://localhost:8000/youtube_url/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(newURL),
-  }).then(fetchResponse)
+
+    fetch("http://localhost:8000/youtube_url/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newURL),
+    }).then(response => response.json())
+    .then(json => setTranscripts(json["pred"]))
+    .catch(error => console.log(error))
 
   
 }
@@ -114,7 +118,7 @@ export default function Homepage({youtubeURL, setYoutubeURL, response, fetchResp
         >
           <Container maxWidth="sm">
             <CssVarsProvider theme={customTheme}>
-              <Box sx={(theme) => theme.typography.display1}>MotionCue</Box>
+              <Box sx={(theme) => Object.assign(theme.typography.display1, {marginBottom: "20px"})}>MotionCue</Box>
             </CssVarsProvider>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
               MotionCue is digitalizing the Performing Arts. We are bringing tools to textualize choreography in videos.

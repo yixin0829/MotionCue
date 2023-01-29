@@ -24,12 +24,8 @@ function Copyright() {
 }
 
 export default function Header() {
-  const responseContext = React.createContext({
-    response: [], fetchResponse: () => {}
-  })
   const [youtubeURL, setYoutubeURL] = React.useState("")
-  const {response, fetchResponse} = React.useContext(responseContext)
-
+  const [transcripts, setTranscripts] = React.useState([]);
 
   return(
 
@@ -50,10 +46,10 @@ export default function Header() {
     </Toolbar>
         </AppBar>
     <TabPanel>
-      <Homepage youtubeURL={youtubeURL} response={response} setYoutubeURL={setYoutubeURL} fetchResponse={fetchResponse}></Homepage>
+      <Homepage youtubeURL={youtubeURL} setYoutubeURL={setYoutubeURL} setTranscripts={setTranscripts}></Homepage>
     </TabPanel>
     <TabPanel>
-       <Transcription youtubeURL={youtubeURL} response={response}></Transcription>
+       <Transcription youtubeURL={youtubeURL} transcript={transcripts}></Transcription>
     </TabPanel>
   </Tabs>
        <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">

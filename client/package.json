@@ -14,7 +14,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@u-wave/react-youtube": "^0.7.4",
     "bootstrap": "^5.2.3",
-    "cr": "file:material-ui/core/styles/createMuiTheme",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
