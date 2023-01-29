@@ -55,7 +55,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-export default function Homepage({youtubeURL, setYoutubeURL, setTranscripts}) {
+export default function Homepage({youtubeURL, setYoutubeURL, setTranscripts, setMessage}) {
   
   const [value, setValue] = React.useState('one');
 
@@ -78,7 +78,16 @@ export default function Homepage({youtubeURL, setYoutubeURL, setTranscripts}) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newURL),
     }).then(response => response.json())
-    .then(json => setTranscripts(json["pred"]))
+    .then(json => {
+      setTranscripts(json["pred"]);
+      fetch(`http://localhost:8000/generate?prompt=${JSON.stringify(json["pred"])}`, {
+        method: "GET",
+      }).then(
+        response => response.json()
+      ).then(nestedJson => {
+        setMessage(nestedJson["message"])
+      })
+    })
     .catch(error => console.log(error))
 
   

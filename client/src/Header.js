@@ -43,6 +43,7 @@ function Copyright() {
 export default function Header() {
   const [youtubeURL, setYoutubeURL] = React.useState("")
   const [transcripts, setTranscripts] = React.useState([]);
+  const [chatGPTMessage, setMessage] = React.useState("");
 
   return(
 
@@ -58,10 +59,11 @@ export default function Header() {
     </Toolbar>
         </AppBar>
     <TabPanel>
-      <Homepage youtubeURL={youtubeURL} setYoutubeURL={setYoutubeURL} setTranscripts={setTranscripts}></Homepage>
+      <Homepage youtubeURL={youtubeURL} setMessage={setMessage} 
+      setYoutubeURL={setYoutubeURL} setTranscripts={setTranscripts}></Homepage>
     </TabPanel>
     <TabPanel>
-       <Transcription youtubeURL={youtubeURL} transcript={transcripts}></Transcription>
+       <Transcription youtubeURL={youtubeURL} transcript={transcripts} message={chatGPTMessage}></Transcription>
     </TabPanel>
   </Tabs>
        <Box class="boxspace" sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">

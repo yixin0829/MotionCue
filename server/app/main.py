@@ -64,7 +64,7 @@ async def add_url(link: Link):
     # model = DanceScribeModel()
     # pred = model.predict(df, TEMP_PATH="../temp/")
     # return {"urlset": {link.url}, "pred": str(pred)}
-    
+
     return {
         "urlset": "fawefawefwef",
         "pred": ["a", "b", "c", "d", "e"]
