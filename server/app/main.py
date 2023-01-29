@@ -18,6 +18,12 @@ origins = ["http://localhost:3000", "localhost:3000"]
 
 class Link(BaseModel):
     url: str
+    class Config:
+        schema_extra = {
+            "example": {
+                "url": "https://www.youtube.com/shorts/obx4XRKQm9o"
+            }
+        }
 
 
 class Item(BaseModel):
@@ -52,13 +58,10 @@ async def read_item(item_id: str, q: Union[str, None] = None):
 @app.post("/youtube_url/")
 async def add_url(link: Link):
     # motioncue detection model here (https://www.youtube.com/shorts/obx4XRKQm9o)
-    extractImages(link.url, TEMP_DIR="temp/")
-    df = frame_to_landmark(
-        DATA_PATH="/Users/mymytran/Documents/git-projects/dance-scription/server/app/temp"
-    )
+    # extractImages(link.url, TEMP_PATH="../temp/")
+    df = frame_to_landmark(TEMP_PATH="../temp/")
     model = DanceScribeModel()
-    pred = model.predict(df)
-
+    pred = model.predict(df, TEMP_PATH="../temp/")
     return {"urlset": {link.url}, "pred": str(pred)}
 
 @app.get("/generate")
