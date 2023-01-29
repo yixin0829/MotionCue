@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from typing import Union
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from training_dance import *
 
 app = FastAPI()
 
@@ -40,11 +41,14 @@ async def read_item(item_id: str, q: Union[str, None] = None):
 
 @app.post("/youtube_url/")
 async def add_url(link: Link):
-    # motioncue detection model here
+    # motioncue detection model here (https://www.youtube.com/shorts/obx4XRKQm9o)
+    extractImages(link.url, TEMP_DIR="temp/")
+    df = frame_to_landmark(DATA_PATH="/home/yixin0829/code/dance-scription/server/app/temp")
+    model = DanceScribeModel()
+    pred = model.predict(df)
 
-    # return response:
-        # text.txt
     return {
-        "urlset": { link.url}
+        "urlset": {link.url},
+        "pred": str(pred)
     }
 
