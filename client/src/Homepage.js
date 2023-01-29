@@ -1,16 +1,9 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
@@ -18,6 +11,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssVarsProvider, extendTheme } from '@mui/joy/styles';
+import TextField from '@mui/material/TextField';
  // import image
 import sample_detect_img from './sample-homepage-motion-annotated.gif';
 
@@ -65,10 +59,6 @@ const responseContext = React.createContext({
   response: [], fetchResponse: () => {}
 })
 
-// function SendYoutubeURL() {
-  
-// }
-
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -87,7 +77,7 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const theme = createTheme();
 
 export default function Homepage() {
-
+  
   const [value, setValue] = React.useState('one');
 
   const handleChange = (event, newValue) => {
@@ -103,7 +93,7 @@ export default function Homepage() {
   
   const handleSubmit = (event) => {
     const newURL = {
-      "url": "youtubeURL"
+      "url": youtubeURL
     }
   fetch("http://localhost:8000/youtube_url/", {
     method: "POST",
@@ -117,14 +107,6 @@ export default function Homepage() {
   return (
     <ThemeProvider theme={themeOptions}>
       <CssBaseline />
-      {/* <AppBar class="button" position="relative">
-        <Toolbar>
-          <CameraIcon sx={{ mr: 2 }} />
-          <Typography variant="h6" color="inherit" noWrap>
-            MotionCue
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
       <main>
       <Grid container spacing={2} columns={16}>
       <Grid item xs={8}>
@@ -152,8 +134,25 @@ export default function Homepage() {
               spacing={2}
               justifyContent="center"
             >
-              <Button class="button" variant="contained" onClick={handleSubmit}>Submit a video url</Button>
-              <Button variant="outlined">View an example</Button>
+            <Button variant="outlined">View an example</Button>
+    <Paper>
+        <Box
+        sx={{
+            width: 250,
+            maxWidth: '100%',
+        }}
+        >   
+      <TextField
+        onChange={handleInput}
+        value={youtubeURL}
+        fullWidth label="Enter a video URL"//optional
+        size="medium" id="fullWidth"
+      />
+      </Box>
+
+      <Button class="button" variant="contained" onClick={handleSubmit}>Submit a video url</Button>
+    </Paper>           
+
             </Stack>
           </Container>
         </Box>
