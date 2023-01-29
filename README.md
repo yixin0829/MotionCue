@@ -1,6 +1,9 @@
 # MotionCue
 QHack 2023
 
+Homepage 
+![](motioncuegif.gif)
+
 # Resources
 ## Training our model
 - https://opencv.org/
