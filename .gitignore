@@ -3,10 +3,11 @@ activateSource
 virtualEnv
 temp
 temp/
-temp_ggbb/
+temp_*/
 .env
 __pycache__/
 gggbbs_1
 gggbbs_2
 clusters
 
+data/
