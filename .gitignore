@@ -1,2 +1,5 @@
 _client/
 temp/
+temp_ggbb/
+.env
+__pycache__/
