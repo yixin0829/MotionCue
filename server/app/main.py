@@ -47,7 +47,7 @@ async def add_url(link: Link):
     # motioncue detection model here (https://www.youtube.com/shorts/obx4XRKQm9o)
     extractImages(link.url, TEMP_DIR="temp/")
     df = frame_to_landmark(
-        DATA_PATH="/home/yixin0829/code/dance-scription/server/app/temp"
+        DATA_PATH="/Users/mymytran/Documents/git-projects/dance-scription/server/app/temp"
     )
     model = DanceScribeModel()
     pred = model.predict(df)
