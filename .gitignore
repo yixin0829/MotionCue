@@ -2,3 +2,7 @@ _client/
 activateSource
 virtualEnv
 temp
+temp/
+temp_ggbb/
+.env
+__pycache__/
