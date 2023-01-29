@@ -188,7 +188,7 @@ class DanceScribeModel(object):
     def load_model(self):
         with open(
             # CHANGE THIS TO TRAINED MODEL!
-            "/home/yixin0829/code/dance-scription/server/models/classifier.pkl", "rb"
+            "/Users/mymytran/Documents/git-projects/dance-scription/server/models/classifier.pkl", "rb"
         ) as fid:
             self.model = pickle.load(fid)
 

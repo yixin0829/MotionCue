@@ -11,6 +11,31 @@
   border-radius: 3px;
   border: 0;
   color: white;
+  height: 50px;
+  padding: 0 30px;
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+}
+
+.menu {
+  /* background: linear-gradient(45deg, #3c76b0 20%, #050505 90%); */
+  /* background: linear-gradient(45deg, #5a63e0 20%, #ff8e53 90%); */
+  /* background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%); */
+
+  border-radius: 3px;
+  border: 0;
+  color: white;
+  height: 48px;
+  /* box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3); */
+}
+
+.tool {
+  /* background: linear-gradient(45deg, #3c76b0 20%, #050505 90%); */
+  background: linear-gradient(45deg, #5a63e0 20%, #ff8e53 90%);
+  /* background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%); */
+
+  border-radius: 3px;
+  border: 0;
+  color: white;
   height: 48px;
   padding: 0 30px;
   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
@@ -23,6 +48,12 @@
   width: 100%;
 }
 
+.textfield{
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
