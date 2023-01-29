@@ -1,7 +1,6 @@
 _client/
 activateSource
 virtualEnv
-temp
 temp/
 temp_*/
 .env
