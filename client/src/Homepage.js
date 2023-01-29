@@ -114,7 +114,7 @@ export default function Homepage({youtubeURL, setYoutubeURL, response, fetchResp
         >
           <Container maxWidth="sm">
             <CssVarsProvider theme={customTheme}>
-              <Box sx={(theme) => theme.typography.display1}>MotionCue</Box>
+              <Box sx={(theme) => Object.assign(theme.typography.display1, {marginBottom: "20px"})}>MotionCue</Box>
             </CssVarsProvider>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
               MotionCue is digitalizing the Performing Arts. We are bringing tools to textualize choreography in videos.
