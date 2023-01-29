@@ -22,9 +22,9 @@ import pickle
 import re
 
 
-def extractImages(v_path, TEMP_DIR="temp/"):
+def extractImages(v_path, TEMP_PATH ="../temp"):
     """
-    Extract Frames (1f/s) From the input youtube video URL (v_path) and store the images in TEMP_DIR
+    Extract Frames (1f/s) From the input youtube video URL (v_path) and store the images in TEMP_PATH 
     Run this only once to get necessary data.
     """
 
@@ -58,13 +58,13 @@ def extractImages(v_path, TEMP_DIR="temp/"):
 
     # Create temp/ directory for storage
     try:
-        os.mkdir(TEMP_DIR)
+        os.mkdir(TEMP_PATH )
     except FileExistsError:
         print(
             f"FileExistsError: Temporary directory already exists. Removing the directory beofre creating a new one."
         )
-        shutil.rmtree(TEMP_DIR)
-        os.mkdir(TEMP_DIR)
+        shutil.rmtree(TEMP_PATH )
+        os.mkdir(TEMP_PATH )
 
     count = 1
     success = True
@@ -75,7 +75,7 @@ def extractImages(v_path, TEMP_DIR="temp/"):
 
         try:
             cv2.imwrite(
-                TEMP_DIR + "/frame%d.jpg" % count, image
+                TEMP_PATH  + "/frame%d.jpg" % count, image
             )  # save frame as JPEG file
         except Exception as e:
             break
@@ -86,7 +86,7 @@ def extractImages(v_path, TEMP_DIR="temp/"):
 
 class LandmarkProcessor:
     """
-    Helper class for processing extracted video images in TEMP_DIR into a tabular csv format which
+    Helper class for processing extracted video images in TEMP_PATH  into a tabular csv format which
     contains landmarks of 33 joint points (66 features + 2 metadata columns)
     """
     def __init__(self):
@@ -153,7 +153,7 @@ class LandmarkProcessor:
         return final_columns
 
 
-def frame_to_landmark(DATA_PATH:str = "./temp/") -> pd.DataFrame:
+def frame_to_landmark(TEMP_PATH = "../temp") -> pd.DataFrame:
     """
     Take in the temporary image folder path as input and
     return the processed DataFrame (IMAGE_NAME, ... FEATURES..., LABEL)
@@ -167,7 +167,7 @@ def frame_to_landmark(DATA_PATH:str = "./temp/") -> pd.DataFrame:
     }
     pose_enums_array = list(pose_enums_dict.keys())
 
-    Processor.add_images_to_final_dataset(DATA_PATH, label=np.nan)
+    Processor.add_images_to_final_dataset(TEMP_PATH, label=np.nan)
 
     # Putting together final pandas DataFrame
     df = pd.DataFrame(
@@ -188,19 +188,31 @@ class DanceScribeModel(object):
     def load_model(self):
         with open(
             # CHANGE THIS TO TRAINED MODEL!
-            "/Users/mymytran/Documents/git-projects/dance-scription/server/models/classifier.pkl", "rb"
+            "../models/classifier.pkl", "rb"
         ) as fid:
             self.model = pickle.load(fid)
 
     @classmethod
-    def predict(self, df: pd.DataFrame):
+    def predict(self, df: pd.DataFrame, TEMP_PATH="../temp") -> list:
         """Take a string text as input and call fake news dector model. Return 0 or 1 based on whether it's fake news (1) or not (0)"""
         self.load_model()
 
+        # Preprocessing the input df to drop any NULL (RF does not take NULL)
+        df = df.dropna(axis=0, subset=df.columns[1:-1])
+
         X = df.iloc[:, 1:-1].to_numpy()
         pred = self.model.predict(X)
-        # TODO: return richer preiction in an array object
-        return pred
+
+        # Clean the temp file after making the prediction
+        try:
+            shutil.rmtree(TEMP_PATH )
+        except Exception:
+            pass
+
+        # return richer preiction in an array object
+        labels = {0: 'Ready', 1: 'Rising Hands', 2: 'Cover Face', 3:'Left Kick', 4: 'Chicken Arms', 5: 'Strong Pose'}
+        pred_final = [labels[key] for key in list(pred)]
+        return pred_final
 
 
 # For debugging

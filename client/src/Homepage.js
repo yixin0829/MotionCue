@@ -55,9 +55,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-export default function Homepage({youtubeURL, setYoutubeURL, response, fetchResponse}) {
+export default function Homepage({youtubeURL, setYoutubeURL, setTranscripts}) {
   
   const [value, setValue] = React.useState('one');
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -71,11 +72,14 @@ export default function Homepage({youtubeURL, setYoutubeURL, response, fetchResp
     const newURL = {
       "url": youtubeURL
     }
-  fetch("http://localhost:8000/youtube_url/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(newURL),
-  }).then(fetchResponse)
+
+    fetch("http://localhost:8000/youtube_url/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newURL),
+    }).then(response => response.json())
+    .then(json => setTranscripts(json["pred"]))
+    .catch(error => console.log(error))
 
   
 }
