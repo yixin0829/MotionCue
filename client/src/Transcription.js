@@ -11,6 +11,7 @@ import Link from '@mui/material/Link';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import React, { useEffect, useRef } from 'react';
 import YouTube from '@u-wave/react-youtube'; // eslint-disable-line import/no-unresolved
@@ -40,7 +41,7 @@ const dummy_transcript = [
   "Jump", "Sleep", "Hop", "Run", "Spin", "Map"
 ]
 
-export default function Transcription({youtubeURL, response, transcript=dummy_transcript})  {
+export default function Transcription({youtubeURL, transcript=[]})  {
 
   const [volume, setVolume] = useState(1);
   const [paused, setPaused] = useState(false);
@@ -101,11 +102,9 @@ export default function Transcription({youtubeURL, response, transcript=dummy_tr
         </Typography>
         
         <Typography color="black" variant="h2">
+        {(transcript.length === 0) && <CircularProgress/>}
         {(frame > 0 && frame <= transcript.length) && transcript[frame - 1]}
         </Typography>
-          
-          <br/>
-          {response}
       </CardContent>
       <CardActions>
         {/* <Button size="small">Learn More</Button> */}
