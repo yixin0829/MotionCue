@@ -1,6 +1,12 @@
 _client/
+activateSource
+virtualEnv
 temp/
 temp_*/
 .env
 __pycache__/
+gggbbs_1
+gggbbs_2
+clusters
+
 data/
