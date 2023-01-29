@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssVarsProvider, extendTheme } from '@mui/joy/styles';
 import TextField from '@mui/material/TextField';
  // import image
-import sample_detect_img from './sample-homepage-motion-annotated.gif';
+import sample_detect_img from './imgs/sample-homepage-motion-annotated.gif';
 
 export const themeOptions = createTheme({
   palette: {
@@ -54,22 +54,6 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
 }));
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        MotionCue
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-const theme = createTheme();
 
 export default function Homepage({youtubeURL, setYoutubeURL, response, fetchResponse}) {
   
@@ -97,6 +81,7 @@ export default function Homepage({youtubeURL, setYoutubeURL, response, fetchResp
 }
 // localhost:8000/youtube_url
   return (
+    <div>
     <ThemeProvider theme={themeOptions}>
       <CssBaseline />
       <main>
@@ -114,19 +99,17 @@ export default function Homepage({youtubeURL, setYoutubeURL, response, fetchResp
         >
           <Container maxWidth="sm">
             <CssVarsProvider theme={customTheme}>
-              <Box sx={(theme) => theme.typography.display1}>MotionCue</Box>
+              <Box  sx={(theme) => Object.assign(theme.typography.display1, {"margin-top": 80} )}>MotionCue</Box>
             </CssVarsProvider>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              MotionCue is digitalizing the Performing Arts. We are bringing tools to textualize choreography in videos.
-              This is a new form of transcribing! We are digitalizing body movements, in order to identify the movements and dance steps, so that we can provide users a comprehensive textual guide on dance movements. 
-            </Typography>
+            MotionCue is bringing digital accessibility to the Performing Arts.   <br/> </Typography>
             <Stack
               sx={{ pt: 4 }}
               direction="row"
               spacing={2}
               justifyContent="center"
             >
-              
+        
             <Button variant="outlined">View an example</Button>
 
       <TextField
@@ -154,6 +137,6 @@ export default function Homepage({youtubeURL, setYoutubeURL, response, fetchResp
         </Grid>
       </main>
     </ThemeProvider>
-
+      </div>
   );
 }

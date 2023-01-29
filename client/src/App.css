@@ -3,6 +3,17 @@
   font: "PT Sans";
 }
 
+.About{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.boxspace{
+  margin-top: 250px;
+  margin-bottom: 40px;
+}
 .button {
   /* background: linear-gradient(45deg, #3c76b0 20%, #050505 90%); */
   background: linear-gradient(45deg, #5a63e0 20%, #ff8e53 90%);
@@ -15,7 +26,6 @@
   padding: 0 30px;
   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
 }
-
 .menu {
   /* background: linear-gradient(45deg, #3c76b0 20%, #050505 90%); */
   /* background: linear-gradient(45deg, #5a63e0 20%, #ff8e53 90%); */
