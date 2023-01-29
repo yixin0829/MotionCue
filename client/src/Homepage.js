@@ -15,7 +15,6 @@ import TextField from '@mui/material/TextField';
  // import image
 import sample_detect_img from './sample-homepage-motion-annotated.gif';
 
-
 export const themeOptions = createTheme({
   palette: {
     type: 'light',
@@ -55,10 +54,6 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
 }));
 
-const responseContext = React.createContext({
-  response: [], fetchResponse: () => {}
-})
-
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -76,17 +71,14 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
-export default function Homepage() {
+export default function Homepage({youtubeURL, setYoutubeURL, response, fetchResponse}) {
   
   const [value, setValue] = React.useState('one');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const [youtubeURL, setYoutubeURL] = React.useState("")
-  const {response, fetchResponse} = React.useContext(responseContext)
-
+  
   const handleInput = event  => {
     setYoutubeURL(event.target.value)
   }
@@ -134,24 +126,18 @@ export default function Homepage() {
               spacing={2}
               justifyContent="center"
             >
+              
             <Button variant="outlined">View an example</Button>
-    <Paper>
-        <Box
-        sx={{
-            width: 250,
-            maxWidth: '100%',
-        }}
-        >   
+
       <TextField
         onChange={handleInput}
         value={youtubeURL}
         fullWidth label="Enter a video URL"//optional
-        size="medium" id="fullWidth"
+        size="large" id="fullWidth"
       />
-      </Box>
 
       <Button class="button" variant="contained" onClick={handleSubmit}>Submit a video url</Button>
-    </Paper>           
+         
 
             </Stack>
           </Container>
@@ -167,61 +153,7 @@ export default function Homepage() {
         </Grid>
         </Grid>
       </main>
-      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          {/* Footer */}
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Welcome to MotionCue. Here to help you accelerate your learning!!
-        </Typography>
-        <Copyright />
-      </Box>
-      {/* End footer */}
     </ThemeProvider>
 
   );
 }
-
-//unused
-// On the backend, we contextulize your choreography to text by digitising a dancing body. This is a new form of transcribing! We are digitalizing body movements, in order to identify the movements and dance steps, so that we can provide users a comprehensive textual guide on dance movements. (/)
-
-//       <Container sx={{ py: 8 }} maxWidth="md">
-//   {/* End hero unit */}
-//   <Grid container spacing={4}>
-//     {cards.map((card) => (
-//       <Grid item key={card} xs={12} sm={6} md={4}>
-//         <Card
-//           sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-//         >
-//           <CardMedia
-//             component="img"
-//             sx={{
-//               // 16:9
-//               pt: '56.25%',
-//             }}
-//             image="https://source.unsplash.com/random"
-//             alt="random"
-//           />
-//           <CardContent sx={{ flexGrow: 1 }}>
-//             <Typography gutterBottom variant="h5" component="h2">
-//               Heading
-//             </Typography>
-//             <Typography>
-//               This is a media card. You can use this section to describe the
-//               content.
-//             </Typography>
-//           </CardContent>
-//           <CardActions>
-//             <Button size="small">View</Button>
-//             <Button size="small">Edit</Button>
-//           </CardActions>
-//         </Card>
-//       </Grid>
-//     ))}
-//   </Grid>
-// </Container>
