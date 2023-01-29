@@ -41,31 +41,39 @@ const dummy_transcript = [
   "Jump", "Sleep", "Hop", "Run", "Spin", "Map"
 ]
 
-export default function Transcription({youtubeURL, transcript=[]})  {
+export default function Transcription({youtubeURL, transcript=[], message})  {
 
   const [volume, setVolume] = useState(1);
   const [paused, setPaused] = useState(false);
   const [frame, setFrame] = useState(0);
   const intervalRef = useRef(null);
 
+  useEffect(() => {
+    return () => { 
+      intervalRef.current = clearInterval(intervalRef.current) 
+    }
+  }, []);
 
   useEffect(() => {
-    return () => clearInterval(intervalRef.current)
-  }, []);
+    console.log(frame);
+  }, [frame])
 
 
   const handlePlayerPause = useCallback(() => {
     setPaused(true);
-    clearInterval(intervalRef.current);
+    intervalRef.current = clearInterval(intervalRef.current);
   }, []);
 
   const handlePlayerPlay = useCallback((e) => {
     let currentFrame = Math.floor(e.target.getCurrentTime());
     setFrame(currentFrame); // start from one frame earlier
 
-    intervalRef.current = setInterval(() => {
-      setFrame(prevFrame => prevFrame + 1); // so that frame is on time at 0s offset from currentFrame
-    }, 1000);
+    console.log("Interval Ref:", intervalRef.current)
+    if (!intervalRef.current){ 
+      intervalRef.current = setInterval(() => {
+        setFrame(prevFrame => prevFrame + 1); // so that frame is on time at 0s offset from currentFrame
+      }, 1000);
+    }
 
     // Time in Seconds
     // console.log();
@@ -104,6 +112,10 @@ export default function Transcription({youtubeURL, transcript=[]})  {
         <Typography color="black" variant="h2">
         {(transcript.length === 0) && <CircularProgress/>}
         {(frame > 0 && frame <= transcript.length) && transcript[frame - 1]}
+        </Typography>
+
+        <Typography color="gray" variant="body2">
+            {message}
         </Typography>
       </CardContent>
       <CardActions>

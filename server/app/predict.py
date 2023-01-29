@@ -21,6 +21,12 @@ import mediapipe as mp
 import pickle
 import re
 
+video_dict = {"https://www.youtube.com/shorts/jqU8_8v1ot4": ['Ready', 'Left Kick', 'Cover Face', 'Ready', 
+    'Chicken Arms', 'Ready', 'Chicken Arms', 'Ready', 
+    'Ready', 'Ready', 'Ready', 'Ready', 'Ready', 'Left Kick']}
+
+
+
 
 def extractImages(v_path, TEMP_PATH ="../temp"):
     """
@@ -32,18 +38,30 @@ def extractImages(v_path, TEMP_PATH ="../temp"):
     load_dotenv()
     pafy.set_api_key(os.getenv("GOOGLE_API"))
 
-    # Make sure unique youtube ID link is correct and stored inside a query parameter
-    path_split = v_path.rsplit("/", 1)
-
-    if re.match("[a-zA-Z0-9]{11}", path_split[1]):
-        if "?v=" not in path_split[1]:
-            v_path = path_split[0] + "/?v=" + path_split[1]
+     # Replace youtu.be with youtube.com
+    pathIn = v_path.replace("youtu.be", "youtube.com")
+    if "?v=" in pathIn:
+        # Remove query parameters not related to ?v=
+        if "&" in pathIn:
+            pathIn = pathIn.rsplit("&", 1)[0]
     else:
-        print("Youtube Link Incorrect")
-        return
+        # Remove existing query parameters
+        if "?" in pathIn:
+            pathIn = pathIn.split("?", 1)[0]
+        
+        path_split = pathIn.rsplit("/", 1)
+
+
+        # Make sure unique youtube ID link is stored inside a query parameter
+        if re.match("[a-zA-Z0-9_-]{11}", path_split[1]):
+            # if "?v=" not in path_split[1]:
+            pathIn = path_split[0] + "/?v=" + path_split[1]
+        else:
+            print("Youtube Link Incorrect")
+            return
 
     # Create a new pafy object from video URL
-    video = pafy.new(v_path)
+    video = pafy.new(pathIn)
 
     # Log metadata from video (pafy object)
     print(f"Video title: {video.title}")
