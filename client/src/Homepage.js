@@ -18,10 +18,8 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssVarsProvider, extendTheme } from '@mui/joy/styles';
-import Box2 from '@mui/joy/Box';
-
  // import image
- import sample_detect_img from './sample-homepage-motion-annotated.gif';
+import sample_detect_img from './sample-homepage-motion-annotated.gif';
 
 
 export const themeOptions = createTheme({
@@ -89,6 +87,13 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const theme = createTheme();
 
 export default function Homepage() {
+
+  const [value, setValue] = React.useState('one');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   const [youtubeURL, setYoutubeURL] = React.useState("")
   const {response, fetchResponse} = React.useContext(responseContext)
 
@@ -105,19 +110,21 @@ export default function Homepage() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newURL),
   }).then(fetchResponse)
+
+  
 }
 // localhost:8000/youtube_url
   return (
     <ThemeProvider theme={themeOptions}>
       <CssBaseline />
-      <AppBar class="button" position="relative">
+      {/* <AppBar class="button" position="relative">
         <Toolbar>
           <CameraIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
             MotionCue
           </Typography>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
       <main>
       <Grid container spacing={2} columns={16}>
       <Grid item xs={8}>
