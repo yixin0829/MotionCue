@@ -1,7 +1,8 @@
 # MotionCue
-QHack 2023
+QHack 2023 submission. MotionCue is a motion annotation solution that "transcribe" movement to text.
 
-Homepage 
+See more details in our Devpose: [link](https://devpost.com/software/danse-scription)
+
 ![](motioncuegif.gif)
 
 # Resources
